@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import user from "../Images/user2.png"
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -27,6 +28,7 @@ export default function Home() {
             <thead className="table-dark text-center">
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">profile</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Number</th>
@@ -35,8 +37,9 @@ export default function Home() {
             </thead>
             <tbody className=" text-center">
               {users.map((ruser, index) => (
-                <tr>
+                <tr >
                   <th scope="row">{index + 1}</th>
+                  <img className="" src={user} alt="" />
                   <td>{ruser.name}</td>
                   <td>{ruser.username}</td>
                   <td>{ruser.email}</td>
