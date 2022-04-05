@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import user from "../Images/user2.png"
+import Snackbar from '@mui/material/Snackbar';
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  const [user, setUsers] = useState([]);
 
   useEffect(() => {
     dbUsers();
+    
   }, []);
+
 
   const dbUsers = async () => {
     const result = await axios.get("http://localhost:3001/users");
@@ -28,21 +30,25 @@ export default function Home() {
             <thead className="table-dark text-center">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">profile</th>
+                {/* <th scope="col">profile</th> */}
                 <th scope="col">Name</th>
+                <th scope="col">Username</th>
                 <th scope="col">Email</th>
-                <th scope="col">Number</th>
+                <th scope="col">Phone Number</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody className=" text-center">
-              {users.map((ruser, index) => (
-                <tr >
-                  <th scope="row">{index + 1}</th>
-                  <img className="" src={user} alt="" />
-                  <td>{ruser.name}</td>
+              {user.map((ruser, sno) => (
+                
+                <tr key={sno}>
+                  <th scope="row">{sno + 1}</th>
+                  {/* <img className="" src={user} alt="" /> */}
+                  <td > {ruser.name}</td>
                   <td>{ruser.username}</td>
                   <td>{ruser.email}</td>
+                  <td>{ruser.phone}</td>
+
                   <td>
                     <Link
                       className="btn btn-warning mx-2"

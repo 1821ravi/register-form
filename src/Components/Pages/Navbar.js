@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light"
+        className="navbar navbar-expand navbar-light"
         style={{ backgroundColor: `#4D77FF` }}
       >
         <div className="container-fluid">

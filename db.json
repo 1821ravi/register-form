@@ -11,15 +11,22 @@
       "name": "Harsh Parmar",
       "username": "Harsh",
       "email": "harsh@gmail.com",
-      "phone": "23484035468",
+      "phone": "1234567890",
       "id": 2
     },
     {
-      "name": "sfasff",
-      "username": "afa",
-      "email": "abcd@gmail",
-      "phone": "99998552222222222222",
+      "name": "ravi",
+      "username": "raj12",
+      "email": "ravisadariya03@gmail.com",
+      "phone": "7016054201",
       "id": 3
+    },
+    {
+      "name": "chainesh",
+      "username": "CR",
+      "email": "cr@gmail.com",
+      "phone": "7016054201",
+      "id": 4
     }
   ]
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import validate from "../validation";
 
 export default function AddUser() {
   let navigate = useNavigate();
@@ -12,23 +13,44 @@ export default function AddUser() {
     phone: "",
   });
   const { name, username, email, phone } = users;
+  const [formError, setFormError] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const onInputChange = (e) => {
     setUser({ ...users, [e.target.name]: e.target.value });
   };
 
+  
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setFormError(validate(users));
+    setIsSubmit(true);
+    //  axios.put(`http://localhost:3001/users/${id}`, users);
+    // navigate("/");
+  };
+
+  useEffect(  async () => {
+    if (Object.keys(formError).length === 0 && isSubmit) {
+      await axios.put("http://localhost:3001/users", users);
+      navigate("/");
+      
+    }
+  }, [formError]);
+  // useEffect(async () => {
+  //   if (Object.keys(formError).length === 0 && isSubmit) {
+  //     await axios.put("http://localhost:3001/users", users);
+  //     navigate("/");
+  //   }
+  // }, [formError]);
   useEffect(() => {
     loadUser();
-  },[]);
-  
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await axios.put(`http://localhost:3001/users/${id}`,users);
-    navigate("/");
-  };
+  }, []);
+
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3001/users/${id}`)
+    const result = await axios.get(`http://localhost:3001/users/${id}`);
     setUser(result.data);
-  }
+  };
   return (
     <>
       <div className="container">
@@ -44,6 +66,7 @@ export default function AddUser() {
                 value={name}
                 onChange={(e) => onInputChange(e)}
               />
+              <p>{formError.name}</p>
             </div>
             <div className="mb-3 ">
               <input
@@ -54,6 +77,7 @@ export default function AddUser() {
                 value={username}
                 onChange={(e) => onInputChange(e)}
               />
+              <p>{formError.username}</p>
             </div>
             <div className="mb-3 ">
               <input
@@ -64,6 +88,7 @@ export default function AddUser() {
                 value={email}
                 onChange={(e) => onInputChange(e)}
               />
+              <p>{formError.email}</p>
             </div>
             <div className="mb-3 ">
               <input
@@ -74,11 +99,10 @@ export default function AddUser() {
                 value={phone}
                 onChange={(e) => onInputChange(e)}
               />
+              <p>{formError.phone}</p>
             </div>
             <div className="text-center">
-              <button className="btn btn-warning">
-                Edit User Info
-              </button>
+              <button className="btn btn-warning" type="submit">Edit User Info</button>
             </div>
           </form>
         </div>

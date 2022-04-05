@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route  path="/" element={<Home />} />
+          <Route  path="/" element={<Home/>} />
           <Route  path="/users/adduser" element={<AddUser />} />
           <Route  path="/users/edituser/:id" element={<EditUser />} />
         </Routes>
